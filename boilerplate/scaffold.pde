@@ -1,10 +1,19 @@
 import processing.svg.*;
 import processing.pdf.*;
 import geomerative.*;
+// HiVis library for handling CSVs
+import hivis.common.*;
+import hivis.data.*;
+import hivis.data.reader.*;
+import hivis.data.view.*;
+// Toxiclibs library for Polar to cartesian conversions
+import toxi.math.*;
+import toxi.geom.*;
 
 /* Set the width and height of your screen canvas in pixels */
 final int CONFIG_WIDTH_PIXELS = 500;
 final int CONFIG_HEIGHT_PIXELS = 500;
+final int REG_PIXELS = 50;
 
 PFont f;
 
@@ -45,6 +54,19 @@ void seededRender() {
   randomSeed(seed);
   noiseSeed(seed);
   render();
+  makeRegistrationMarks();
+}
+
+void makeRegistrationMarks() {
+  strokeWeight(1);
+  stroke(255, 0, 0);
+  line(35, 10, 35, REG_PIXELS); // Top left
+  stroke(0, 0, 0);
+  line(10,35, REG_PIXELS, 35);
+  stroke(255, 0, 0);
+  line(width-35,10,width-35, REG_PIXELS); // Top right
+  stroke(0, 0, 0);
+  line(width-10,35,width-REG_PIXELS,35);
 }
 
 void keyPressed() {
@@ -91,7 +113,7 @@ void saveHighRes(int scaleFactor) {
   hires.scale(scaleFactor);
   seededRender();
   endRecord();
-  hires.save("../Renders"+seed + "highres-" + seed + ".png");
+  hires.save("../Renders/highres-" + seed + ".png");
   println("Finished");
 }
 
