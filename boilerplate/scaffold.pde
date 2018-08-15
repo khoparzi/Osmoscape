@@ -9,13 +9,24 @@ import hivis.data.view.*;
 // Toxiclibs library for Polar to cartesian conversions
 import toxi.math.*;
 import toxi.geom.*;
+// controlP5 for UI elements
+import controlP5.*;
 
 /* Set the width and height of your screen canvas in pixels */
-final int CONFIG_WIDTH_PIXELS = 500;
-final int CONFIG_HEIGHT_PIXELS = 500;
+final int CONFIG_WIDTH_PIXELS = 1000;
+final int CONFIG_HEIGHT_PIXELS = 1000;
 final int REG_PIXELS = 50;
 
 PFont f;
+ControlP5 cp5;
+boolean showUI = true;
+
+int pointSize = 50;
+float highY = 100;
+int margin = 10;
+int gap = 5;
+int yGap = 5;
+int rows, cols;
 
 /*
  * When generating high-resolution images, the CONFIG_SCALE_FACTOR
@@ -44,17 +55,57 @@ void setup() {
   seed = millis();
   f = createFont("Arial",24);
   textFont(f);
+  cp5 = new ControlP5(this);
+  addUI();
+
+  colorMode(HSB, 360, 100, 100, 100);
+  // readData();
   seededRender();
 }
 
 void draw() {
 }
 
+void addUI() {
+  cp5.addSlider("highY")
+     .setPosition(10,10)
+     .setRange(0,255)
+     .setValue(128);
+
+  cp5.addSlider("pointSize")
+    .setPosition(10,20);
+
+  cp5.addSlider("margin")
+    .setPosition(10,30)
+    .setValue(10);
+
+  cp5.addSlider("gap")
+    .setPosition(10,40)
+    .setValue(5);
+
+  cp5.addSlider("yGap")
+    .setPosition(10,50)
+    .setRange(1,50)
+    .setValue(5);
+}
+
 void seededRender() {
   randomSeed(seed);
   noiseSeed(seed);
   render();
-  makeRegistrationMarks();
+}
+
+// To update the render after every controlP5
+void controlEvent(ControlEvent theEvent) {
+  render();
+}
+
+int fromOrigin() {
+  return height - margin;
+}
+
+int fromOrigin(int y) {
+  return height - margin - y;
 }
 
 void makeRegistrationMarks() {
@@ -67,6 +118,28 @@ void makeRegistrationMarks() {
   line(width-35,10,width-35, REG_PIXELS); // Top right
   stroke(0, 0, 0);
   line(width-10,35,width-REG_PIXELS,35);
+}
+
+void makeGrid() {
+  // We get number of horz by taking the height of the chart
+  // then we divide that by yGap
+  int horzs = fromOrigin() / yGap;
+  int vertz = (width - margin) / (gap + pointSize);
+  stroke(40);
+  for (int row=0; row < horzs; row++) {
+    int y = fromOrigin(yGap * row);
+    line(margin,y,width-margin,y);
+    stroke(20);
+    for(int col=0; col<vertz; col++) {
+      int x = margin + ((gap + pointSize) * col);
+      line(x ,fromOrigin(), x,margin);
+    }
+  }
+}
+
+void makeAxis() {
+  stroke(255, 0, 0);
+  line(margin,fromOrigin(),width-margin,fromOrigin());
 }
 
 void keyPressed() {
@@ -87,6 +160,16 @@ void keyPressed() {
     seed = millis();
     seededRender();
     break;
+  case 'u':
+    if (showUI){
+      showUI = false;
+      cp5.hide();
+    } else {
+      showUI = true;
+      cp5.show();
+    }
+    render();
+    break;
   case '?':
     println("Keyboard shortcuts:");
     println("  n: Generate a new seeded image");
@@ -94,12 +177,13 @@ void keyPressed() {
     println("  h: Save high-resolution image");
     println("  p: Save PDF version");
     println("  s: Save SVG version");
+    println("  u: Show hide UI");
   }
 }
 
 void saveLowRes() {
   println("Saving low-resolution image...");
-  save("../Renders/lowres-" + seed + ".png");
+  save("../Renders/" + this.getClass().getName() + "-lowres-" + seed + ".png");
   println("Finished");
 }
 
@@ -113,13 +197,13 @@ void saveHighRes(int scaleFactor) {
   hires.scale(scaleFactor);
   seededRender();
   endRecord();
-  hires.save("../Renders/highres-" + seed + ".png");
+  hires.save("../Renders/" + this.getClass().getName() + "-highres-" + seed + ".png");
   println("Finished");
 }
 
 void savePDF() {
   println("Saving PDF image...");
-  beginRecord(PDF, "../Renders/vector-" + seed + ".pdf");
+  beginRecord(PDF, "../Renders/" + this.getClass().getName() + "-vector-" + seed + ".pdf");
   seededRender();
   endRecord();
   println("Finished");
@@ -127,7 +211,7 @@ void savePDF() {
 
 void saveSVG() {
   println("Saving SVG image...");
-  beginRecord(SVG, "../Renders/vector-" + seed + ".svg");
+  beginRecord(SVG, "../Renders/" + this.getClass().getName() + "-vector-" + seed + ".svg");
   seededRender();
   endRecord();
   println("Finished");
