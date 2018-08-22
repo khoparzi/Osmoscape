@@ -11,6 +11,9 @@ import toxi.math.*;
 import toxi.geom.*;
 // controlP5 for UI elements
 import controlP5.*;
+// For random colours
+import java.awt.Color;
+import dawesometoolkit.*;
 
 /* Set the width and height of your screen canvas in pixels */
 final int CONFIG_WIDTH_PIXELS = 1000;
@@ -21,6 +24,12 @@ PFont f;
 ControlP5 cp5;
 boolean showUI = true;
 
+DataTable data;
+Vec2D[][] points;
+float[][] values;
+String[] labels;
+DawesomeToolkit tools = new DawesomeToolkit(this);
+ArrayList<Integer> colors; color currentColor;
 int pointSize = 50;
 float highY = 100;
 int margin = 10;
@@ -140,6 +149,28 @@ void makeGrid() {
 void makeAxis() {
   stroke(255, 0, 0);
   line(margin,fromOrigin(),width-margin,fromOrigin());
+}
+
+public ArrayList satSpectrum(int numItems, color col){
+  float hue = hue(col);
+  float brightness = brightness(col);
+	ArrayList colors = new ArrayList();
+	for (int i=0; i < numItems; i++){
+		Color c = new Color(Color.HSBtoRGB(hue,(float)(1.0/numItems)*i,brightness));
+		colors.add(c.getRGB());
+	}
+	return colors;
+}
+
+public ArrayList lumSpectrum(int numItems, color col){
+  float hue = hue(col);
+  float saturation = saturation(col);
+	ArrayList colors = new ArrayList();
+	for (int i=0; i < numItems; i++){
+		Color c = new Color(Color.HSBtoRGB(hue,saturation,(float)(1.0/numItems)*i));
+		colors.add(c.getRGB());
+	}
+	return colors;
 }
 
 void keyPressed() {
