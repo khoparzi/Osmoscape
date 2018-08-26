@@ -1,4 +1,12 @@
 void readData() {
+  // data = readCSV("../../data/2018/csv.csv", -2);
+  if (data != null) {
+    rows = data.length();
+    cols = data.seriesCount();
+    points = new Vec2D[cols][rows];
+    values = new float[cols][rows];
+    colors = tools.colorSpectrum(cols,0.6,0.9);
+  }
 }
 
 void render() {
