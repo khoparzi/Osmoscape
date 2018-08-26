@@ -67,7 +67,6 @@ void setup() {
   cp5 = new ControlP5(this);
   addUI();
 
-  colorMode(HSB, 360, 100, 100, 100);
   // readData();
   seededRender();
 }
