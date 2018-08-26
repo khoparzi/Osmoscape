@@ -67,7 +67,7 @@ void setup() {
   cp5 = new ControlP5(this);
   addUI();
 
-  // readData();
+  readData();
   seededRender();
 }
 
