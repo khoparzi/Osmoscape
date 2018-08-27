@@ -30,6 +30,16 @@ void render() {
   if (data != null) {
     fill(255);
     text(rows, width/2, margin+24);
+
+    textSize(12);
+    // Make labels
+    for( DataRow row : data) {
+      int num = row.getRowIndex();
+      fill(colors.get(num)); noStroke();
+      ellipse(margin + 20, num * 30 + (margin*2), 20, 20);
+      text(row.getString(0), margin + 40, num * 30 + (margin*2));
+    }
+
     int maxWidth = width - margin;
     int step = maxWidth / cols;
     // Drawing the population circles
