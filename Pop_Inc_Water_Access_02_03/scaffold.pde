@@ -30,13 +30,11 @@ float[][] values;
 String[] labels;
 DawesomeToolkit tools = new DawesomeToolkit(this);
 ArrayList<Integer> colors; color currentColor;
-int pointSize = 10;
+int pointSize = 200;
 float highY = 100, maxVal;
 int margin = 10;
-int gap = 5, eas = 6;
-int yGap = 5;
-int rows, cols;
 int easY = 6, easR = 3, yGap, gap;
+int rows, cols, skips;
 
 /*
  * When generating high-resolution images, the CONFIG_SCALE_FACTOR
@@ -78,7 +76,7 @@ void draw() {
 void addUI() {
   cp5.addSlider("highY")
      .setPosition(10,10)
-     .setRange(0,400)
+     .setRange(0,950)
      .setValue(400);
 
   cp5.addSlider("pointSize")
@@ -98,6 +96,10 @@ void addUI() {
     .setRange(1,8)
     .setValue(3);
 
+  cp5.addSlider("skips")
+    .setPosition(10,60)
+    .setRange(1,4)
+    .setValue(1);
 }
 
 void seededRender() {
