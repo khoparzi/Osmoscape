@@ -36,6 +36,7 @@ int margin = 10;
 int gap = 5, eas = 6;
 int yGap = 5;
 int rows, cols;
+int easY = 6, easR = 3, yGap, gap;
 
 /*
  * When generating high-resolution images, the CONFIG_SCALE_FACTOR
@@ -87,19 +88,16 @@ void addUI() {
     .setPosition(10,30)
     .setValue(10);
 
-  // cp5.addSlider("gap")
-  //   .setPosition(10,40)
-  //   .setValue(5);
+  cp5.addSlider("easY")
+    .setPosition(10,40)
+    .setRange(1,8)
+    .setValue(1);
 
-  // cp5.addSlider("yGap")
-  //   .setPosition(10,50)
-  //   .setRange(1,50)
-  //   .setValue(5);
+  cp5.addSlider("easR")
+    .setPosition(10,50)
+    .setRange(1,8)
+    .setValue(3);
 
-    cp5.addSlider("eas")
-      .setPosition(10,50)
-      .setRange(1,8)
-      .setValue(6);
 }
 
 void seededRender() {

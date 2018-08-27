@@ -47,7 +47,14 @@ void render() {
 
 float mappedVal(float input) {
   return map2(input, 0, 5500,
-    height - margin - pointSize, // The lowest point
-    margin + pointSize, // The highest point
-    eas, 2);
+    height - margin,// - pointSize, // The lowest point
+    margin + highY, // The highest point
+    easY, 2);
+}
+
+float mappedVal(float input, boolean rad) {
+  return map2(input, 0, 5500,
+    0, // The smallest point
+    pointSize, // The largest point
+    easR, 2);
 }
