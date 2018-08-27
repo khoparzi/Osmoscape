@@ -152,13 +152,10 @@ DataTable scaledCSV(DataTable dataRange, String scaling) {
       }
     });
     scaling = scaling + " to " + highY;
-  } else if (scaling.equals("mapped")) {
+  } else if (scaling.equals("divided")) {
     scaledData = dataRange.apply(new SeriesFunction() {
       public DataSeries apply(DataSeries inputSeries) {
-        if (inputSeries.isNumeric()) {
-          DataSeries divSeries = inputSeries.divide(1000000);
-          return divSeries;
-        } else return inputSeries;
+        return inputSeries.isNumeric() ? inputSeries.divide(1000000) : inputSeries;
       }
     });
     scaling = " divided by 1000000";
