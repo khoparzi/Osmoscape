@@ -31,10 +31,10 @@ String[] labels;
 DawesomeToolkit tools = new DawesomeToolkit(this);
 ArrayList<Integer> colors; color currentColor;
 int pointSize = 50;
-float highY = 100, sector, tight = 0.2, lowY = 30;
+float highY = 100, sector, tight = 0.24, lowY = 30;
 int margin = 10;
-int gap = 5, highRow;
-int yGap = 5;
+float gap = 0.6;
+int yGap = 5, highRow;
 int rows, cols;
 
 /*
@@ -99,6 +99,11 @@ void addUI() {
   cp5.addSlider("tight")
     .setPosition(10,60)
     .setRange(0, 0.5);
+
+  cp5.addSlider("gap")
+    .setPosition(10,70)
+    .setRange(0,2)
+    .setValue(0.6);
 }
 
 void seededRender() {
