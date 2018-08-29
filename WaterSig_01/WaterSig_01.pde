@@ -55,6 +55,26 @@ void render() {
     }
     endShape();
 
+    // Make markers
+    int markRow = 0; noStroke();
+    for(float marker : data.get(0).asFloatArray()) {
+      if (markRow % 6 == 1) {
+        Vec2D markPoint = new Vec2D(270, markRow * sector)
+          .toCartesian().add(width/2, height/2);
+        fill(100);
+        if (markPoint.x > width/2) {
+          textAlign(LEFT);
+          text(marker, markPoint.x + 10, markPoint.y);
+        } else {
+          textAlign(RIGHT);
+          text(marker, markPoint.x - 10, markPoint.y);
+        }
+        fill(20);
+        ellipse(markPoint.x, markPoint.y, 5, 5);
+      }
+      markRow++;
+    }
+  }
 
   // Marker
   stroke(255, 50, 50); strokeWeight(0.4);
