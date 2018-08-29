@@ -32,7 +32,7 @@ DawesomeToolkit tools = new DawesomeToolkit(this);
 ArrayList<Integer> colors; color currentColor;
 int pointSize = 200;
 float highY = 100, maxVal;
-int margin = 10;
+int margin = 30;
 int easY = 6, easR = 3, yGap, gap;
 int rows, cols, skips;
 
@@ -84,7 +84,7 @@ void addUI() {
 
   cp5.addSlider("margin")
     .setPosition(10,30)
-    .setValue(10);
+    .setValue(30);
 
   cp5.addSlider("easY")
     .setPosition(10,40)

@@ -28,10 +28,8 @@ void render() {
   ellipseMode(CENTER);
   /* Write your drawing code here */
   if (data != null) {
-    fill(255);
-    text(rows, width/2, margin+24);
-
     textSize(12);
+    textAlign(LEFT);
     // Make labels
     for( DataRow row : data) {
       int num = row.getRowIndex();
@@ -42,6 +40,22 @@ void render() {
 
     int maxWidth = width - margin;
     int step = maxWidth / cols;
+
+    fill(200);
+    // Make year labels
+    int labelNum = 0;
+    for (String label : popData.getSeriesLabels()) {
+      if (labelNum > 0) {
+        // if we need to skip anything check if this row needs to be skipped
+        if (skips > 1 && labelNum % skips == 1)
+          text(label, (step * (labelNum - 1)) + 15, height - 15);
+        // else make sure we don't need to skip
+        else if (skips == 1)
+          text(label, (step * (labelNum - 1)) + 15, height - 15);
+      }
+      labelNum++;
+    }
+
     // Drawing the population circles
     for (int row=0; row < rows; row++) {
       // Get the water data for current row
@@ -63,6 +77,20 @@ void render() {
         fill(255);
       }
     }
+
+    // Make markers
+    textAlign(RIGHT, CENTER);
+    for (int i=0; i < 20; i+=1) {
+      float markVal = lerp(0, 5500, i * 0.05);
+      fill(0); noStroke();
+      ellipse(width - margin, mappedVal(markVal), 5, 5);
+      fill(255);
+      text(floor(markVal), width - margin - 10, mappedVal(markVal));
+    }
+    fill(0); noStroke();
+    ellipse(width - margin, mappedVal(5500), 5, 5);
+    fill(255);
+    text(5500, width - margin - 10, mappedVal(5500));
   }
 }
 

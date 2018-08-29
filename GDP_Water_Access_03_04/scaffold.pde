@@ -31,8 +31,8 @@ String[] labels;
 DawesomeToolkit tools = new DawesomeToolkit(this);
 ArrayList<Integer> colors; color currentColor;
 int pointSize = 200;
-float highY = 120, maxVal;
-int margin = 10;
+float highY = 0, maxVal;
+int margin = 30;
 int easY = 6, easR = 3, yGap, gap;
 int rows, cols, skips;
 
@@ -77,7 +77,7 @@ void addUI() {
   cp5.addSlider("highY")
      .setPosition(10,10)
      .setRange(0,950)
-     .setValue(120);
+     .setValue(0);
 
   cp5.addSlider("pointSize")
     .setRange(0,950)
@@ -85,7 +85,7 @@ void addUI() {
 
   cp5.addSlider("margin")
     .setPosition(10,30)
-    .setValue(10);
+    .setValue(30);
 
   cp5.addSlider("easY")
     .setPosition(10,40)
