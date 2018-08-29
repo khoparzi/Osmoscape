@@ -25,6 +25,8 @@ void render() {
       DataSeries column = data.get(label);
       if (column.isNumeric()) {
         if (!label.equals("1900")) translate(columnWidth + gap, 0);
+        // Year label
+        fill(255);
         text(label,0,fromOrigin(50));
 
         int numRuns = 0;
@@ -40,8 +42,9 @@ void render() {
 
           drawColumn(column.getFloat(row), val2);
           fill(255);
-          // text(column.getFloat(row), 0, highY + 20);
-          // text(val2, columnWidth, highY + 40);
+          text(column.getFloat(row), 0, highY + 20);
+          fill(150, 0, 0);
+          text(val2, columnWidth, highY + 40);
         }
         translate(0, -((highY + yGap) * numRuns));
       }
@@ -52,8 +55,8 @@ void render() {
 }
 
 void drawColumn(float val1, float val2) {
-  float valp1 = map2(val1, 0, 3200, 0, highY, eas, 2);
-  float valp2 = map2(val2, 0, 3200, 0, highY, eas, 2);
+  float valp1 = map2(val1, 0, 3130, 0, highY, eas, 2);
+  float valp2 = map2(val2, 0, 3130, 0, highY, eas, 2);
 
   // Left line
   stroke(200); strokeWeight(0.5);
