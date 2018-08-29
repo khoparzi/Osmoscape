@@ -10,9 +10,9 @@ void readData() {
 }
 
 void render() {
-  // makeGrid();
   background(200); // To clear BG before next render
   ellipseMode(CENTER);
+  makeGrid();
   makeRegistrationMarks(); // If we want RegistrationMarks
   makeAxis(); // Make an axis line
 

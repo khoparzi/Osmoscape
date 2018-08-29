@@ -138,19 +138,14 @@ void makeRegistrationMarks() {
 }
 
 void makeGrid() {
-  // We get number of horz by taking the height of the chart
-  // then we divide that by yGap
-  int horzs = fromOrigin() / yGap;
-  int vertz = (width - margin) / (gap + pointSize);
-  stroke(40);
-  for (int row=0; row < horzs; row++) {
-    int y = fromOrigin(yGap * row);
-    line(margin,y,width-margin,y);
-    stroke(20);
-    for(int col=0; col<vertz; col++) {
-      int x = margin + ((gap + pointSize) * col);
-      line(x ,fromOrigin(), x,margin);
-    }
+  for (int row=0; row < 5; row++) {
+    float rad = map(3200 + (row * 200) + 270, 3200, 3600, lowY, highY);
+    float val = map(3200 + (row * 100), 3200, 3600, lowY, highY);
+    stroke(80); strokeWeight(0.2); noFill();
+    ellipse(width/2, height/2, rad, rad);
+    Vec2D point = new Vec2D(val, 50)
+      .toCartesian().add(width/2, height/2);
+    text(3200 + (row*100), point.x, point.y);
   }
 }
 
