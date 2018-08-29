@@ -29,15 +29,17 @@ void render() {
   // makeGrid();
   makeRegistrationMarks(); // If we want RegistrationMarks
   makeAxis(); // Make an axis line
-  // Make labels
-  for (int col=0; col < cols-2; col++) {
-    fill(colors.get(col)); noStroke();
-    ellipse(margin + 20, margin + (col*50) + 20, 20, 20);
-    text(labels[col], margin + 70, margin + (col*50) + 20);
-  }
+  rectMode(CENTER);
 
   /* Write your drawing code here */
   if (data != null) {
+    // Make labels
+    for (int col=0; col < cols-2; col++) {
+      fill(colors.get(col)); noStroke();
+      ellipse(margin + 20, margin + (col*50) + 20, 20, 20);
+      text(labels[col], margin + 70, margin + (col*50) + 20);
+    }
+
     ellipseMode(CENTER);
     pushMatrix();
     translate(margin, margin + highY);
@@ -52,7 +54,7 @@ void render() {
         ellipse(randomGaussian(), randomGaussian(), rad, rad);
         fill(255);
         // text(row % 6,0,0);
-        if (col==3) text(names[row], 0, 20);
+        if (col==3) text(names[row], 0, highY / 2, highY, 40);
         if ((row % 6)==5)
           translate((highY + gap) * -6, highY + yGap);
       }
