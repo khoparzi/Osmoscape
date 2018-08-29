@@ -115,13 +115,19 @@ DataTable readCSV(String selection, int endCol) {
 }
 
 DataTable readCSV(String selection, int[] colSel) {
+  DataTable rawData = readCSV(selection);
+  DataTable cropTable = HV.newTable();
+  if (colSel[0] > 0 && colSel.length > 3)
+   cropTable = cropTable.addSeries(rawData.selectSeries(0));
+
   // If specified end column is positive read till that column
   if (colSel[1] > 0)
-    return readCSV(selection).selectSeriesRange(colSel[0], colSel[1]);
+    return cropTable.combine(
+      rawData.selectSeriesRange(colSel[0], colSel[1]));
   // Else cutoff of the number of specified columns from the end
   else {
-    DataTable rawData = readCSV(selection);
-    return rawData.selectSeriesRange(colSel[0], rawData.seriesCount() + colSel[1]);
+    return cropTable.combine(
+      rawData.selectSeriesRange(colSel[0], rawData.seriesCount() + colSel[1]));
   }
 }
 
@@ -153,7 +159,7 @@ DataTable scaledCSV(DataTable dataRange, String scaling) {
     });
     scaling = scaling + " to " + highY;
   }
-  
+
   println("PROCESSED DATA WITH "+scaling);
   println(scaledData);
   return scaledData;

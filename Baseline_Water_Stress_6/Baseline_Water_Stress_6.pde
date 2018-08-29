@@ -1,4 +1,4 @@
-int[] colSel = {1, -3};
+int[] colSel = {1, -3, 1};
 void readData() {
   data = readCSV("../../data/2018/6_SHORTLISTED_Baseline_Water_Stress.csv", colSel);
   if (data != null) {
