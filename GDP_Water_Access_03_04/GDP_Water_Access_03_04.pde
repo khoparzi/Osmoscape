@@ -56,7 +56,7 @@ void render() {
         stroke(colors.get(row)); noFill();
         ellipse(point.x,point.y,rad,rad);
         // The water circle
-        fill(colors.get(row)); noStroke();
+        fill(colors.get(row), 50); noStroke();
         ellipse(point.x,point.y, percent, percent);
         fill(255);
       }

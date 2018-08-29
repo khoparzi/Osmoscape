@@ -80,6 +80,7 @@ void addUI() {
      .setValue(120);
 
   cp5.addSlider("pointSize")
+    .setRange(0,950)
     .setPosition(10,20);
 
   cp5.addSlider("margin")
