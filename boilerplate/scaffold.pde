@@ -62,7 +62,7 @@ void settings() {
 
 void setup() {
   seed = millis();
-  f = createFont("Arial",24);
+  f = createFont("Arial",14);
   textFont(f);
   cp5 = new ControlP5(this);
   addUI();
@@ -113,6 +113,10 @@ int fromOrigin() {
 }
 
 int fromOrigin(int y) {
+  return height - margin - y;
+}
+
+float fromOrigin(float y) {
   return height - margin - y;
 }
 

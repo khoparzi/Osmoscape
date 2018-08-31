@@ -88,6 +88,9 @@ DataTable readCSV(String selection) {
             temp.append(Double.parseDouble(val));
             break;
           case "string":
+            if (temp.isNumeric())
+              temp.append(0.0f);
+            else
             temp.append(val);
             break;
         }
