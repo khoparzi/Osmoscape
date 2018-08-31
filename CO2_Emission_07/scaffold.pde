@@ -89,7 +89,7 @@ void addUI() {
 
   cp5.addSlider("gap")
     .setPosition(10,40)
-    .setValue(5);
+    .setValue(1);
 
   cp5.addSlider("yGap")
     .setPosition(10,50)

@@ -1,4 +1,4 @@
-int[] selec = {99, -2, 1};
+int[] selec = {0, -2, 1};
 float maxVal = 0;
 
 void readData() {
@@ -27,7 +27,6 @@ void render() {
 
   /* Write your drawing code here */
   if (data != null) {
-    // text(maxVal, width/2, margin * 3);
     int row = 0;
     // Reading code
     for (DataRow rowData : data) {
@@ -57,7 +56,7 @@ void render() {
     translate(-800,0);
     for (String year : data.getSeriesLabels()) {
       int x = (num > 1) ? (num * (pointSize + gap)) + 5 : 0;
-      if (num > 1) text(year, -205, x);
+      if (num > 1 && num % 10 == 0) text(year, -205, x);
       num++;
     }
     popMatrix();
@@ -88,21 +87,22 @@ void drawColumn(int index, float y) {
 
   int levels = int(y) / yGap;
 
+  float jit = randomGaussian();
+
   // Final line
   strokeWeight(1);
   stroke(currentColor);
   line(
-    x, fromOrigin(int(y)),
-    x + pointSize, fromOrigin(int(y))
+    x, fromOrigin(int(y + jit)),
+    x + pointSize, fromOrigin(int(y + jit))
     );
 
-  strokeWeight(0.4);
-  stroke(60);
+  strokeWeight(0.6);
   for (int level=0; level < levels; level++) {
     int sy = fromOrigin(yGap * level);
     line(
-      x, sy,
-      x + pointSize, sy
+      x, sy + jit,
+      x + pointSize, sy + jit
     );
   }
 }
