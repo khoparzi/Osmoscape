@@ -36,12 +36,14 @@ void render() {
     DataSeries col = data.get(1);
     for (int row=0; row < rows; row++) {
       int x = (row * (pointSize + gap)) + margin;
-      fill(200);
+      fill(200); noStroke();
       ellipse(x, mappedVal(col.getFloat(row)), pointSize, pointSize);
       fill(255, 220, 100);
       ellipse(x, five, pointSize, pointSize);
       fill(120, 240, 230);
       ellipse(x, fivehalf, pointSize, pointSize);
+      stroke(20);
+      line(x,mappedVal(col.getFloat(row)) + 2.5,x,height - margin);
     }
   }
 }
