@@ -6,7 +6,6 @@ void readData() {
     rows = data.length();
     cols = data.seriesCount();
     points = new Vec2D[rows][cols-1];
-    // values = new float[cols][rows];
     colors = tools.colorSpectrum(rows,0.6,0.9);
   }
 }
