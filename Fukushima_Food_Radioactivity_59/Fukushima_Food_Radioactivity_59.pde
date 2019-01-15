@@ -41,10 +41,25 @@ void render() {
     for (int row=0; row < rows; row++) {
       for(int col=0; col < cols; col++) {
         float x = points[col][0].x + 100;
-        float y = points[col][0].y + 100;
+        float y = points[col][0].y + 200;
         fill(colors.get(row), 100); noStroke();
         float val = mappedVal(values[col][row]);
-        rect(x+random(-50,50), y+random(0,50), val, val);
+        // rect(x+random(-50,50), y+random(0,50), val, val);
+
+        // Make a point cloud of mondrian boxes
+        float pointCount = 0;
+        fill(colors.get(row), 100);
+        while (pointCount < val) {
+          //ellipse(x + ((pointCount % 20) * 10), y+((pointCount/20)*10), 6, 6);
+          float sizer = ((pointCount % 10)) + 6;
+          ellipse(
+            // x + ((pointCount % 20) * 10), y + ((pointCount / 20) * 10) - 50,
+            x + (randomGaussian() * (val/4)), y + (randomGaussian() * (val/4)),
+            sizer, sizer
+          );
+          pointCount++;
+        }
+
         // text(values[col][row], x, y + 20);
         fill(200);
         if (row == rows - 1)
