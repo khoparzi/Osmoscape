@@ -1,3 +1,4 @@
+// Select columns to be read
 int[] selec = {31, -3};
 
 void readData() {
@@ -39,7 +40,7 @@ void render() {
     }
 
     int maxWidth = width - margin;
-    int step = maxWidth / cols;
+    int step = maxWidth / rows;
 
     fill(200);
     // Make year labels
@@ -62,41 +63,24 @@ void render() {
       DataRow waterRow = data.getRow(row);
 
       for(int col=0; col < 26; col+=skips) {
-        Vec2D point = new Vec2D(step * (col+1), mappedVal(values[col][row]));
+        Vec2D point = new Vec2D((step * (row)) + margin, height*0.5);
         points[col][row] = point;
 
         float rad = mappedVal(values[col][row], true);
         float waterVal = waterRow.getFloat(col+1);
         float percent = rad * (waterVal/100);
-        // The population circle
-        stroke(colors.get(row)); noFill();
-        ellipse(point.x,point.y,rad,rad);
         // The water circle
-        fill(colors.get(row)); noStroke();
+        stroke(colors.get(row), 50); noFill();
         ellipse(point.x,point.y, percent, percent);
         fill(255);
       }
     }
-
-    // Make markers
-    textAlign(RIGHT, CENTER);
-    for (int i=0; i < 20; i+=1) {
-      float markVal = lerp(0, 5500, i * 0.05);
-      fill(0); noStroke();
-      ellipse(width - margin, mappedVal(markVal), 5, 5);
-      fill(255);
-      text(floor(markVal), width - margin - 10, mappedVal(markVal));
-    }
-    fill(0); noStroke();
-    ellipse(width - margin, mappedVal(5500), 5, 5);
-    fill(255);
-    text(5500, width - margin - 10, mappedVal(5500));
   }
 }
 
 float mappedVal(float input) {
   return map2(input, 0, 5500,
-    height - margin,// - pointSize, // The lowest point
+    height - margin, // The lowest point
     margin + highY, // The highest point
     easY, 2);
 }
@@ -104,6 +88,6 @@ float mappedVal(float input) {
 float mappedVal(float input, boolean rad) {
   return map2(input, 0, 5500,
     0, // The smallest point
-    pointSize, // The largest point
+    300, // The largest point
     easR, 2);
 }

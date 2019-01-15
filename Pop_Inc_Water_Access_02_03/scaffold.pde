@@ -94,12 +94,12 @@ void addUI() {
   cp5.addSlider("easR")
     .setPosition(10,50)
     .setRange(1,8)
-    .setValue(3);
+    .setValue(8);
 
   cp5.addSlider("skips")
     .setPosition(10,60)
     .setRange(1,4)
-    .setValue(1);
+    .setValue(3);
 }
 
 void seededRender() {
