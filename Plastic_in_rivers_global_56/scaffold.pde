@@ -77,8 +77,8 @@ void draw() {
 void addUI() {
   cp5.addSlider("highY")
      .setPosition(10,10)
-     .setRange(0,900)
-     .setValue(900);
+     .setRange(0,255)
+     .setValue(200);
 
   cp5.addSlider("pointSize")
     .setPosition(10,20);
@@ -114,15 +114,15 @@ void controlEvent(ControlEvent theEvent) {
 }
 
 int fromOrigin() {
-  return height - margin - 20;
+  return height - margin;
 }
 
 int fromOrigin(int y) {
-  return height - margin - y - 20;
+  return height - margin - y;
 }
 
 float fromOrigin(float y) {
-  return height - margin - y - 20;
+  return height - margin - y;
 }
 
 void makeRegistrationMarks() {
