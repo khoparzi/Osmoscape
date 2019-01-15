@@ -16,4 +16,7 @@ void render() {
   makeAxis(); // Make an axis line
 
   /* Write your drawing code here */
+  if (data != null) {
+    
+  }
 }
