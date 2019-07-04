@@ -32,7 +32,7 @@ DawesomeToolkit tools = new DawesomeToolkit(this);
 ArrayList<Integer> colors; color currentColor;
 int pointSize = 100;
 float highY = 100;
-int margin = 10;
+int margin = 10, maxVal = 30;
 int gap = 5;
 int yGap = 5;
 int rows, cols;

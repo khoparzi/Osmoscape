@@ -49,5 +49,5 @@ void render() {
 }
 
 float mappedVal(float val) {
-  return map(val, 0, 30, 0, pointSize);
+  return map(val, 0, maxVal, 0, pointSize);
 }
