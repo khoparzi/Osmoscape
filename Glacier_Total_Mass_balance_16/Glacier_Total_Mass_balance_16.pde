@@ -49,9 +49,22 @@ void render() {
     }
 
     // line(margin, fromOrigin(highY), width - margin, fromOrigin(highY));
+    // Make markers
+    textAlign(RIGHT, CENTER);
+    for (int i=0; i < 20; i+=1) {
+      float markVal = lerp(minVal, maxVal, i * 0.05);
+      fill(0); noStroke();
+      ellipse(width - margin, mappedVal(markVal), 5, 5);
+      fill(255);
+      text(floor(markVal), width - margin - 10, mappedVal(markVal));
+    }
+    fill(0); noStroke();
+    ellipse(width - margin, mappedVal(maxVal), 5, 5);
+    fill(255);
+    text(maxVal, width - margin - 10, mappedVal(maxVal));
   }
 }
 
 float mappedVal(float val) {
-  return fromOrigin(map(val, -40, 0, 0, highY));
+  return fromOrigin(map(val, minVal, maxVal, 0, highY));
 }
