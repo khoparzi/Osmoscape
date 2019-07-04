@@ -79,28 +79,28 @@ void render() {
     // Make markers
     textAlign(RIGHT, CENTER);
     for (int i=0; i < 20; i+=1) {
-      float markVal = lerp(0, 450, i * 0.05);
+      float markVal = lerp(0, maxVal, i * 0.05);
       fill(0); noStroke();
       ellipse(width - margin, mappedVal(markVal), 5, 5);
       fill(255);
       text(floor(markVal), width - margin - 10, mappedVal(markVal));
     }
     fill(0); noStroke();
-    ellipse(width - margin, mappedVal(450), 5, 5);
+    ellipse(width - margin, mappedVal(maxVal), 5, 5);
     fill(255);
-    text(450, width - margin - 10, mappedVal(450));
+    text(maxVal, width - margin - 10, mappedVal(maxVal));
   }
 }
 
 float mappedVal(float input) {
-  return map2(input, 0, 450,
+  return map2(input, 0, maxVal,
     height - margin, // The lowest point
     margin + highY, // The highest point
     easY, 2);
 }
 
 float mappedVal(float input, boolean rad) {
-  return map2(input, 0, 450,
+  return map2(input, 0, maxVal,
     0, // The smallest point
     pointSize, // The largest point
     easR, 2);

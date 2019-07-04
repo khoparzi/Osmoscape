@@ -31,7 +31,7 @@ String[] labels;
 DawesomeToolkit tools = new DawesomeToolkit(this);
 ArrayList<Integer> colors; color currentColor;
 int pointSize = 200;
-float highY = 0, maxVal;
+float highY = 0, maxVal = 450;
 int margin = 30;
 int easY = 6, easR = 3, yGap, gap;
 int rows, cols, skips;
