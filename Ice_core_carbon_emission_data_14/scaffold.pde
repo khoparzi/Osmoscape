@@ -33,7 +33,7 @@ ArrayList<Integer> colors; color currentColor;
 int pointSize = 5;
 float highY = 100;
 int margin = 10;
-int gap = 20;
+int gap = 20, maxVal = 400;
 int yGap = 5, xSkip = 0;
 int rows, cols;
 
@@ -99,7 +99,7 @@ void addUI() {
   cp5.addSlider("xSkip")
     .setPosition(10,60)
     .setRange(1,10)
-    .setValue(5);
+    .setValue(10);
 }
 
 void seededRender() {
