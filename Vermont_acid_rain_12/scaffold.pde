@@ -85,11 +85,11 @@ void addUI() {
 
   cp5.addSlider("margin")
     .setPosition(10,30)
-    .setValue(10);
+    .setValue(100);
 
   cp5.addSlider("gap")
     .setPosition(10,40)
-    .setValue(6);
+    .setValue(20);
 
   cp5.addSlider("yGap")
     .setPosition(10,50)
