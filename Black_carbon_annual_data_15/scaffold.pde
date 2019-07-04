@@ -33,7 +33,7 @@ ArrayList<Integer> colors; color currentColor;
 int pointSize = 5;
 float highY = 100;
 int margin = 10;
-int gap = 20;
+int gap = 20, maxVal = 10;
 int yGap = 5;
 int rows, cols;
 
